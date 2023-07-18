@@ -1,0 +1,46 @@
+#!/bin/bash
+
+set -eo pipefail
+
+while getopts l:i: arg; do
+  case "${arg}" in
+  l)
+    launcher=$OPTARG
+    ;;
+  i)
+    ignores=$OPTARG
+    ;;
+  *)
+    echo "Usage: $0 [-l launcher] [-i ignores]"
+    exit 1
+    ;;
+  esac
+done
+
+shift $((OPTIND - 1))
+
+case ${launcher:-dmenu} in
+dmenu)
+  dmenu_comand="dmenu $@"
+  ;;
+fuzzel)
+  dmenu_comand="fuzzel --dmenu $@"
+  ;;
+rofi)
+  dmenu_comand="rofi -dmenu $@"
+  ;;
+*)
+  echo "Unsupported launcher"
+  exit 1
+  ;;
+esac
+
+audio_sinks=$(pw-dump | jq --arg ignores "$ignores" '.[]
+                                                     | select(.type == "PipeWire:Interface:Node" and .info.props."media.class" == "Audio/Sink") 
+                                                     | { id: .id, description: .info.props."node.description" }
+                                                     | select(.description | test($ignores; "n") | not)')
+
+selected_audio_sink_description=$(jq -r '.description' <<<$audio_sinks | $dmenu_comand)
+selected_audio_sink_id=$(jq --arg description "$selected_audio_sink_description" 'select(.description == $description) | .id' <<<$audio_sinks)
+
+wpctl set-default $selected_audio_sink_id

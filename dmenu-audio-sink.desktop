@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Dmenu Audio Sink
+Type=Application
+Exec=dmenu-audio-sink
+Categories=Audio;
