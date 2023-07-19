@@ -1,4 +1,4 @@
-pkgname=dmenu-audio-sink
+pkgname=dmenu-pipewire
 pkgver=0.1
 pkgrel=1
 pkgdesc='Audio sink chooser using Pipewire and Dmenu'
@@ -16,12 +16,12 @@ optdepends=(
   'rofi'
 )
 source=(
-  'dmenu-audio-sink'
-  'dmenu-audio-sink.desktop'
+  'dmenu-pipewire'
+  'dmenu-pipewire.desktop'
 )
 md5sums=('SKIP' 'SKIP')
 
 package() {
-  install -Dm755 "dmenu-audio-sink" "$pkgdir/usr/bin/dmenu-audio-sink"
-  install -Dm644 "dmenu-audio-sink.desktop" "$pkgdir/usr/share/applications/dmenu-audio-sink.desktop"
+  install -Dm755 "dmenu-pipewire" "$pkgdir/usr/bin/dmenu-pipewire"
+  install -Dm644 "dmenu-pipewire.desktop" "$pkgdir/usr/share/applications/dmenu-pipewire.desktop"
 }
