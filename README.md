@@ -2,9 +2,10 @@
 
 Audio sink device chooser menu for dmenu-compatible launchers.
 
-## Demo 
+## Demo
 
-https://github.com/hvitoi/dmenu-pipewire/assets/44772383/c06b1b0d-f996-4e5e-866a-f5e5fcad858e
+![dmenu-pipewire](https://github.com/hvitoi/dmenu-pipewire/assets/44772383/6047c6b9-6e49-46fd-987b-e15dedb304f2)
+
 
 ## Usage
 
